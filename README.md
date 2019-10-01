@@ -4,7 +4,7 @@ This library can be used by WideOrbit Streaming customers to obtain audio stream
 
 ## Prerequisites
 
-    minSdkVersion 24
+    minSdkVersion 28
 
     compileOptions {
         sourceCompatibility = 1.8
@@ -30,7 +30,7 @@ Add it in your root build.gradle at the nd of the repositories
 
 
     dependencies {
-        implementation 'com.github.WoStreaming:wos-targeting-android-sdk:v1.0'
+        implementation 'com.github.WoStreaming:wos-targeting-android-sdk:v1.0.0'
     }
 
 ##Usage
