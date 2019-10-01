@@ -1,0 +1,2 @@
+include ':app', ':wostreaming'
+rootProject.name='WOSTargetingAndroidSDK'
