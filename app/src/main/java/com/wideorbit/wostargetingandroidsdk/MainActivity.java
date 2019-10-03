@@ -15,7 +15,7 @@ public class MainActivity extends Activity implements WOSObserver {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		WOSTargeting WOSDK = new WOSTargeting(getApplicationContext(), 6394, true, this);
+		WOSTargeting WOSDK = new WOSTargeting(getApplicationContext(), 0, true, this);
 		WOSTargeting.enableDebug(false);
 		WOSDK.execute();
 	}
