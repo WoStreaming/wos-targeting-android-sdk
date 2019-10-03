@@ -30,7 +30,7 @@ Add it in your root build.gradle at the nd of the repositories
 
 
     dependencies {
-        implementation 'com.github.WoStreaming:wos-targeting-android-sdk:v1.0.0'
+        implementation 'com.github.WoStreaming:wos-targeting-android-sdk:v1.0.1'
     }
 
 ##Usage
