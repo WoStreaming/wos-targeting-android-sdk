@@ -1,8 +1,7 @@
 package com.wideorbit.wostreaming;
 
+import android.net.Uri;
 import android.util.Log;
-
-import com.google.common.base.Joiner;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,20 +20,22 @@ class WOSQueryParams {
 	String ltids = null;
 
 	String toURLParams() {
-		Map<String, String> m = new HashMap<>();
-		m.put("lmt", this.lmt);
-		m.put("ifa", this.ifa);
-		m.put("bundle", this.bundle);
-		m.put("privacypolicy", this.privacypolicy);
-
-		if (this.lmt.equals("0")) {
-			m.put("lptid", this.lptid);
-			m.put("ltids", this.ltids);
-		}
-
 		String url = "";
 		try {
-			url = Joiner.on("&").withKeyValueSeparator("=").join(m);
+			Uri.Builder builder = new Uri.Builder();
+			builder.appendQueryParameter("lmt", this.lmt);
+			builder.appendQueryParameter("ifa", this.ifa);
+			builder.appendQueryParameter("bundle", this.bundle);
+			builder.appendQueryParameter("privacypolicy", this.privacypolicy);
+
+			if (this.lmt.equals("0")) {
+				builder.appendQueryParameter("lptid", this.lptid);
+				builder.appendQueryParameter("ltids", this.ltids);
+			}
+
+			url = builder.build().toString();
+			url = url.replace("?", "&");
+
 		} catch (Exception e) {
 			Log.e(WOSTargeting.LOG_TAG,
 					"Exception creating url param string: e = " + e.toString());

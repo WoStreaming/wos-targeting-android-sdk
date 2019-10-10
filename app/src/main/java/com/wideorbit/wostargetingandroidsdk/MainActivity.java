@@ -22,6 +22,6 @@ public class MainActivity extends Activity implements WOSObserver {
 
 	@Override
 	public void onWOSTargetingReady(String queryParams) {
-		Log.w("WOST: Add the following parameters to your stream url:", queryParams);
+		Log.w("Targeting url params:", queryParams);
 	}
 }

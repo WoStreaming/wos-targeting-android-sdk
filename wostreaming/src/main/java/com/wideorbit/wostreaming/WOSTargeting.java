@@ -1,13 +1,14 @@
 package com.wideorbit.wostreaming;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 
 import java.lang.ref.WeakReference;
+
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 /**
  * WOSTargeting collects the required parameters to append to the WO Streaming URL for advanced ad targeting.
@@ -110,13 +111,15 @@ public class WOSTargeting implements WOSCrowdControlObserver, AdvertisingInfoTas
             return;
         }
 
-        this.setAdvertiserId(this.cc.getId());
-        this.setIsLimitedAdTracking(this.cc.isLimitedAdTrackingEnabled());
-        this.params.lptid = lotameAudienceResponse.Profile.tpid;
-        this.params.ltids = lotameAudienceResponse.Profile.Audiences.Audience.
-                stream()
-                .map(a -> a.id)
-                .collect(Collectors.joining(","));
+		this.setAdvertiserId(this.cc.getId());
+		this.setIsLimitedAdTracking(this.cc.isLimitedAdTrackingEnabled());
+		this.params.lptid = lotameAudienceResponse.Profile.tpid;
+
+		String[] bucket = new String[lotameAudienceResponse.Profile.Audiences.Audience.size()];
+		for (int i = 0; i < lotameAudienceResponse.Profile.Audiences.Audience.size(); i++) {
+			bucket[i] = lotameAudienceResponse.Profile.Audiences.Audience.get(i).id;
+		}
+		this.params.ltids = TextUtils.join(",", bucket);
 
         // Notify the observer and provide the URL Params string
         this.executeCallback();
