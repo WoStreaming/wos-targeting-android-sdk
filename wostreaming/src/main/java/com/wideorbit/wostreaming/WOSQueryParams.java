@@ -8,16 +8,16 @@ import java.util.Map;
 
 class WOSQueryParams {
 	// Device parameters
-	String ifa = null;
+	String ifa = "";
 	String lmt = "0";
 
 	// Application parameters
-	String bundle = null;
-	String privacypolicy = null;
+	String bundle = "";
+	String privacypolicy = "";
 
 	// Lotame parameters
-	String lptid = null;
-	String ltids = null;
+	String lptid = "";
+	String ltids = "";
 
 	String toURLParams() {
 		String url = "";

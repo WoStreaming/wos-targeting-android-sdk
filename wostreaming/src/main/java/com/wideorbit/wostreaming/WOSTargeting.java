@@ -101,7 +101,7 @@ public class WOSTargeting implements WOSCrowdControlObserver, AdvertisingInfoTas
                     "Exception calling CrowdControl.bcp: e = " + e.toString());
         }
 
-        // The Lotame response includes the advertiserID and isLimitedAdTracking value
+        // The Lotame response should include the advertiserID and isLimitedAdTracking value
         LotameAudienceResponse lotameAudienceResponse = cc.getAudience(5, TimeUnit.SECONDS);
 
         // If Lotame fails, collect the advertiser info and return.  AdvertisingInfoTask will do the callback.
@@ -132,8 +132,16 @@ public class WOSTargeting implements WOSCrowdControlObserver, AdvertisingInfoTas
      */
     @Override
     public void setAdvertisingInfo(AdvertisingIdClient.Info adInfo) {
-        this.setAdvertiserId(adInfo.getId());
-        this.setIsLimitedAdTracking(adInfo.isLimitAdTrackingEnabled());
+        if (adInfo != null) {
+            boolean isLimitedAdTrackingEnabled = adInfo.isLimitAdTrackingEnabled();
+            String advertisingId = adInfo.getId();
+
+            if (advertisingId != null) {
+                this.setAdvertiserId(advertisingId);
+                this.setIsLimitedAdTracking(isLimitedAdTrackingEnabled);
+            }
+        }
+
         this.executeCallback();
     }
 
